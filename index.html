@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <title>Nora</title>
 <style>
 
@@ -18,12 +19,12 @@
   }
 
 @font-face {
-    font-family: 'b';
+    font-family: 'c';
     src: url('VIVALDII.ttf') format('truetype');
   }
 
 @font-face {
-    font-family: 'c';
+    font-family: 'b';
     src: url('Alibaba-Black.ttf') format('truetype');
   }
  
@@ -32,6 +33,7 @@
   background:#000;
   color:#EAE7F2;
   font-family:a;
+  scroll-behavior:smooth;
  }
  
  .section{
@@ -164,18 +166,83 @@
    #050304 97%,
    #000000 100%);
  }
+
+ .green{
+ background:linear-gradient(to bottom,
+  #000000 0%,
+  #010201 5%,
+  #020503 10%,
+  #040905 15%,
+  #07100A 20%,
+  #0B1710 25%,
+  #102017 30%,
+  #15291D 36%,
+  #1A3124 42%,
+  #1E3829 50%,
+  #1E3829 100%);
+}
+
+.green-black{
+ background:linear-gradient(to bottom,
+  #1E3829 0%,
+  #1E3829 55%,
+  #1A3124 65%,
+  #15291D 72%,
+  #102017 80%,
+  #0B1710 87%,
+  #07100A 92%,
+  #020503 97%,
+  #000000 100%);
+}
  
  img{
   max-width:100%;
   border-radius:12px;
  }
 
+
+ .star-effect{
+    position:fixed;
+    color:white;
+    pointer-events:none;
+    z-index:1;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #a855f7;
+
+    animation: twinkle 3s forwards;
+}
+
+@keyframes twinkle{
+
+    0%{
+        opacity:0;
+        transform:scale(0.5);
+    }
+
+    30%{
+        opacity:1;
+        transform:scale(1.3);
+    }
+
+    70%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(0.5);
+    }
+
+}
 </style>
 <body>
 <!--1-->
 <section class="section black">
  <div class="content gradient-content">
-  <center><a href="#N" style="background:#24163E;color:#fff;padding:8px;border-radius:5px;text-decoration: none;">اینجا کلیک کن</a></center><br><br><br><br>
+  <center><a id="myBtn" href="#N" style="background:#24163E;color:#fff;padding:8px;border-radius:5px;text-decoration:none;">اینجا کلیک کن</a></center><br><br><br>
   <img src="2.png" alt="moon">
  </div>
 </section>
@@ -183,7 +250,7 @@
 <section class="section purple" id="N">
  <div class="content gradient-content">
   <h2>31 تیر 1387</h2>
-  <p>21 July 2008 · Monday<br>18 Rajab 1429</p>
+  <p style="direction:ltr;">21 July 2008 - Monday<br>18 Rajab 1429</p>
  </div>
 </section>
 <!--3-->
@@ -191,19 +258,20 @@
  <div class="content gradient-content">
   <h2>تا امروز</h2>
   <p>6575 روز<br>939 هفته و 2 روز<br>216 ماه<br>18 سال</p>
+  <p>که این دختر خوشگل به دنیا اومده</p>
  </div>
 </section>
 <!--4-->
 <section class="section indigo">
  <div class="content gradient-content">
   <h2>ماه توی اون شب</h2>
-  <p>روشنایی: 87٪<br>سن ماه: 18 روز<br>فاصله: 383 هزار کیلومتر</p><br><p>عکس ماه بالا عکس ماه توی همون شبه</p>  
+  <p>روشنایی: 87٪<br>سن ماه: 18 روز<br>فاصله: 383 هزار کیلومتر</p><br><p>عکس ماه بالا، عکس ماه توی همون شبه</p>  
  </div>
 </section>
 <!--5-->
 <section class="section indigo-black">
  <div class="content gradient-content">
-  <h2>نماد اون شب صورت فلکی عقربه</h2><br><br><br>
+  <p>نماد شبی که نورا به دنیا اومد صورت فلکی عقربه</p><br><br><br>
   <img src="1.png" alt="constellation">
  </div>
 </section>
@@ -211,7 +279,7 @@
 <section class="section wine">
  <div class="content gradient-content">
   <h2>آپولو 11</h2>
-  <p>در 21 ژوئیه 1969 توی ماموریت آپولو 11 انسان برای اولین پا روی ماه گذاشت. <br><br> .در سال 2011 توی همین روز شاتل فضایی آتلانتیس فرود اومد و شاتل ها بازنشسته شدن</p>
+  <p>در 21 ژوئیه 1969 توی ماموریت آپولو 11 انسان برای اولین پا روی ماه گذاشت.</p>
  </div>
 </section>
 <!--7-->
@@ -222,33 +290,117 @@
  </div>
 </section>
 <!--8-->
+<section class="section green">
+  <div class="content gradient-content">
+   <h2>شب 31 تیر</h2>
+   <p>اون شبی که به دنیا اومدی آسمان فسا صاف و پرستاره بود و هوا همچنان گرم بود.</p>
+   <p>مثل همین صفحه که به خاطرت پرستاره شده</p>
+  </div>
+ </section>
+ <!--9-->
+<section class="section green-black">
+  <div class="content gradient-content">
+   <p>عاشفت بودم، عاشقت هستم، عاشقت خواهم بود و هیچ وقت فراموشت نمیکنم.</p>
+  </div>
+ </section>
+<!--10-->
 <section class="section black">
  <div class="content hero">
-  <center><p>اینجا خوشگل تر از تو وجود نداره</p><br><br><br></center>
+  <center><p>توی اینجا خوشگل تر از شما وجود نداره</p><br><br><br></center>
   <img src="4.jpg" alt="earth">
  </div>
- <center><div style="margin-top:200vh;color:#fff;"><h1 style="font-family:c;">تولدت مبارک</h1><h3 style="font-family:b;">I Love You Nora</h3></div></center>
+ <center><div id="about" style="margin-top:200vh;color:#fff;"><h1 style="font-family:b;">تولدت مبارک</h1><h3 style="font-family:c;">I Love You Nora</h3></div></center>
 </section>
 
 </body>
-<audio id="bgm" loop>
+
+<audio id="clickSound">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-window.addEventListener("load", () => {
-    const audio = document.getElementById("bgm");
 
-    const playAudio = () => {
-        audio.play().catch(() => {});
-    };
+// ==================== CONFETTI ====================
 
-    // تلاش همزمان با لود
-    playAudio();
+const aboutSection = document.getElementById("about");
 
-    // fallback برای اجازه مرورگر
-    document.addEventListener("pointerdown", playAudio, { once: true });
+const confettiObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.7 }
+            });
+
+            confettiObserver.unobserve(aboutSection);
+
+        }
+
+    });
+
 });
+
+confettiObserver.observe(aboutSection);
+
+
+// ==================== CLICK SOUND ====================
+
+document.getElementById("myBtn").addEventListener("click", () => {
+
+    const sound = document.getElementById("clickSound");
+
+    sound.currentTime = 0;
+    sound.play();
+
+});
+
+
+// ==================== STARS ====================
+
+function createStar(){
+
+const star = document.createElement("div");
+
+star.className = "star-effect";
+
+const shapes = ["✦","✧","✶"];
+
+star.innerHTML =
+    shapes[Math.floor(Math.random()*shapes.length)];
+
+star.style.left =
+    Math.random() * 100 + "vw";
+
+star.style.top =
+    Math.random() * 100 + "vh";
+
+star.style.fontSize =
+    (10 + Math.random() * 10) + "px";
+
+document.body.appendChild(star);
+
+setTimeout(() => {
+
+    star.remove();
+
+    createStar(); // ستاره جدید در جای جدید
+
+}, 3000);
+
+}
+
+
+// فقط 3 ستاره اولیه
+for(let i = 0; i < 3; i++){
+
+setTimeout(createStar, i * 1000);
+
+}
+  
 </script>
 </head>
 </html>
